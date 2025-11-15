@@ -165,13 +165,13 @@ if st.session_state.get("authenticated", False):
         st.rerun()
 
 # Debug info for development (remove in production)
-if st.checkbox("Show Debug Info (Development Only)"):
-    st.write("**Session State:**", st.session_state)
+# if st.checkbox("Show Debug Info (Development Only)"):
+#     st.write("**Session State:**", st.session_state)
     
-    # Show available users (be careful with this in production!)
-    if st.checkbox("Show Available Users (Admin Only)"):
-        permissions = load_permissions()
-        if not permissions.empty:
-            st.write("**Registered Users:**")
-            # Only show emails and roles, not sensitive data
-            st.dataframe(permissions[['email', 'role']])
+#     # Show available users (be careful with this in production!)
+#     if st.checkbox("Show Available Users (Admin Only)"):
+#         permissions = load_permissions()
+#         if not permissions.empty:
+#             st.write("**Registered Users:**")
+#             # Only show emails and roles, not sensitive data
+#             st.dataframe(permissions[['email', 'role']])
