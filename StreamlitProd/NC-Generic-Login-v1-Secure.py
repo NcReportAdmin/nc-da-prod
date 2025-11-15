@@ -110,10 +110,17 @@ def load_data_from_sheets(sheet_id, sheet_name=None, header_row=0):
         return pd.DataFrame()
 
 # Streamlit UI
-st.set_page_config(page_title="Nature Counter DATAframe Login", layout="centered")
-st.title("🔐 NC DATA Dashboard Login")
+# Streamlit UI
+st.set_page_config(page_title="Nature Counter Analytics Hub", layout="centered")
+
+# Display logo
+st.image("logo.png", width=180)
+
+# Centered Title
+st.markdown("<h1 style='text-align: center;'>🌿 Nature Counter Analytics Hub</h1>", unsafe_allow_html=True)
 
 # Add security notice
+st.markdown("### Secure Login Portal")
 st.info("🔒 This dashboard uses secure authentication via Google Sheets.")
 
 email = st.text_input("Enter your email:", placeholder="example@company.com").strip().lower()
