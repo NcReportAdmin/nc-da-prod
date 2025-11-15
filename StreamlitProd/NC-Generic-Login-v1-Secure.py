@@ -112,39 +112,17 @@ def load_data_from_sheets(sheet_id, sheet_name=None, header_row=0):
 # Streamlit UI
 st.set_page_config(page_title="Nature Counter Analytics Hub", layout="centered")
 
-# ----------------- HEADER (Logo + Title in One Row) -----------------
-st.markdown("""
-<style>
-.header-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;             /* Space between logo and title */
-    margin-top: -20px;     /* Adjust position */
-    margin-bottom: 10px;
-}
-.header-title {
-    font-size: 38px;
-    font-weight: 700;
-    color: #2B2B2B;
-}
-.header-logo {
-    width: 65px;
-}
-</style>
-""", unsafe_allow_html=True)
+# Display logo
+col1, col2, col3 = st.columns([1.5,2,1])
+with col2:
+    st.image("StreamlitProd/logo.png", width=180)
 
-st.markdown(f"""
-<div class="header-container">
-    <img src="StreamlitProd/logo.png" class="header-logo">
-    <div class="header-title">Nature Counter Analytics Hub</div>
-</div>
-""", unsafe_allow_html=True)
-
+# Centered Title
+st.markdown("<h1 style='text-align: center;'>🌿 Nature Counter Analytics Hub</h1>", unsafe_allow_html=True)
 
 # Add security notice
 st.markdown("### Secure Login Portal")
-st.info("🔒 This dashboard uses secure authentication via Google Sheets.")
+# st.info("🔒 This dashboard uses secure authentication via Google Sheets.")
 
 email = st.text_input("Enter your email:", placeholder="example@company.com").strip().lower()
 
