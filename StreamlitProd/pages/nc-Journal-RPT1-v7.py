@@ -137,7 +137,11 @@ else:
 # selected_indicators = st.sidebar.multiselect("🎯 Select up to 3 Indicators", indicators, max_selections=3)
 
 # Apply filters
-mask = (df["Timestamp"] >= pd.to_datetime(start_date)) & (df["Timestamp"] <= pd.to_datetime(end_date))
+mask = (
+    (df["Timestamp"].dt.date >= start_date) &
+    (df["Timestamp"].dt.date <= end_date)
+)
+#mask = (df["Timestamp"] >= pd.to_datetime(start_date)) & (df["Timestamp"] <= pd.to_datetime(end_date))
 #if selected_indicators:
 #    mask &= df["Indicator"].isin(selected_indicators)
 if selected_emails:
