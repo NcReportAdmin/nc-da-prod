@@ -2,7 +2,10 @@ import streamlit as st
 import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
+from datetime import datetime
+import pytz
 
+@st.cache_resource(ttl=600)  # Cache for 10 minutes
 def get_google_sheets_client():
     """
     Initialize Google Sheets client using service account credentials
@@ -43,7 +46,7 @@ def load_permissions():
             return pd.DataFrame()
         
         # Get the Google Sheet ID from secrets
-        sheet_id = st.secrets["permissions_sheet_id"]
+        sheet_id = st.secrets["mNC_account_master_sheet_id"]
         
         # Open the sheet
         sheet = client.open_by_key(sheet_id)
@@ -117,6 +120,9 @@ col1, col2, col3 = st.columns([1.5,2,1])
 with col2:
     st.image("StreamlitProd/logo.png", width=180)
 
+# Timezone San Francisco time (PT)
+pacific = pytz.timezone("America/Los_Angeles")
+
 # Centered Title
 st.markdown("<h1 style='text-align: center;'>🌿 Nature Counter Analytics Hub</h1>", unsafe_allow_html=True)
 
@@ -138,14 +144,14 @@ if email:
     match = permissions[permissions["email"] == email]
     
     if match.empty:
-        st.error("Email not found. Access denied.")
+        st.error("Account not found. Please try a different account.\n Or, you may register a new one through the Nature Counter Journal or Health Outcome apps.")
         st.error("Please contact your administrator if you believe this is an error.")
     else:
         # Store user data in session state
         user_data = match.iloc[0]
         st.session_state["user_email"] = email
         st.session_state["user_role"] = user_data["role"]
-        st.session_state["user_name"] = user_data.get("name", "User")
+        st.session_state["user_name"] = user_data.get("username", "User")
         st.session_state["authenticated"] = True
         
         st.success(f"Welcome {st.session_state['user_name']}! You are logged in as: {user_data['role']}")
