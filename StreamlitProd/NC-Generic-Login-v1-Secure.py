@@ -144,8 +144,17 @@ if email:
     match = permissions[permissions["email"] == email]
     
     if match.empty:
-        st.error("Account not found. Please try a different account.\n Or, you may register a new one through the Nature Counter Journal or Health Outcome apps.")
-        st.error("Please contact your administrator if you believe this is an error.")
+            st.markdown(
+        """
+        **Account not found. Please try a different account**
+
+        You may register through one of the following apps:
+        - [Nature Counter Journal](https://nc-app.streamlit.app/)
+        - [Health Outcome and Wellbeing Checkin](https://ncweb.pythonanywhere.com/)
+
+        If you believe this is an error, please contact your administrator.
+        """)
+
     else:
         # Store user data in session state
         user_data = match.iloc[0]
